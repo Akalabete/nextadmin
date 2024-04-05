@@ -4,7 +4,7 @@
 .item {
     position: relative;
     background: linear-gradient(to top, #182237, #253352);
-    padding: 20px 0px;
+    padding: 20px 10px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
