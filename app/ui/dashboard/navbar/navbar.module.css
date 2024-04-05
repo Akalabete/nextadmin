@@ -25,7 +25,7 @@
     gap: 10px;
     padding: 10px;
     border-radius: 10px;
-    background-color: #2e374a;;
+    background-color: var(--bgSofter);
 }
 
 .input {
