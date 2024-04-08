@@ -10,3 +10,53 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.addBtn {
+    padding: 10px;
+    background-color: var(--buttons);
+    color: var(--text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.table {
+    width: 100%;
+}
+
+.table td {
+    padding: 10px;
+}
+
+.user {
+    display: flex;
+    gap: 10px;
+    align-self: center;
+}
+
+.userImage {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.buttons {
+    gap: 10px;
+    display: flex;
+}
+
+.button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--text);
+    cursor: pointer;
+    border: none;
+}
+
+.viewbtn {
+    background-color: turquoise;
+}
+
+.deletebtn {
+    background-color: red;
+}
+
