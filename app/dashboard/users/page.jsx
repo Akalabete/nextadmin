@@ -45,12 +45,12 @@ const UsersPage = async () => {
                   </div>
                 </td>
                 <td>{user.email}</td>
-                <td></td>
-                <td>Admin</td>
-                <td>Active</td>
+                <td>{user.createdAt?.toString().slice(4,16)}</td>
+                <td>{user.isAdmin ? "Admin" : "User"}</td>
+                <td>{user.isActive ? "Active" : "Inactive"}</td>
                 <td>
                   <div className= {styles.buttons}>
-                    <Link href="/dashboard/users/test">
+                    <Link href={`/dashboard/users/${user.id}`}>
                       <button className={`${styles.button} ${styles.viewbtn}`}>View</button>
                     </Link>
                     <button className={`${styles.button} ${styles.deletebtn}`}>Delete</button>
@@ -58,34 +58,6 @@ const UsersPage = async () => {
                 </td>
               </tr>
             ))}
-            
-            
-            <tr>
-              <td>
-              <div className={styles.user}>
-                  <Image 
-                    src="/noavatar.png" 
-                    alt="avatar" 
-                    className={styles.userImage}  
-                    width={40} 
-                    height={40}
-                  />
-                  Jo Do
-                </div>
-              </td>
-              <td>jodo@test.fr</td>
-              <td>05.04.2024</td>
-              <td>Client</td>
-              <td>Inactive</td>
-              <td>
-                <div className= {styles.buttons}>
-                  <Link href="/">
-                    <button className={`${styles.button} ${styles.viewbtn}`}>View</button>
-                  </Link>
-                  <button className={`${styles.button} ${styles.deletebtn}`}>Delete</button>
-                </div>
-              </td>
-            </tr>
           </tbody>
         </table>
         <Pagination />
