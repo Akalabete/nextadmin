@@ -12,10 +12,8 @@ const Pagination = ( {count} ) => {
 
     const params = new URLSearchParams(searchParams)
     const itemsPerPage = 4;
-    console.log(count, itemsPerPage, page)
     const hasPrev = itemsPerPage* (parseInt(page)-1)>0;
     const hasNext = itemsPerPage* (parseInt(page)-1) + itemsPerPage < count ;
-    console.log(hasNext, hasPrev)
     const handlePageClick = (action) => {
         console.log("click", action)
         if (action === "prev") {
