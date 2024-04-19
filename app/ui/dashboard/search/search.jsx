@@ -14,6 +14,7 @@ const Search = ({placeholder}) => {
     
     const handleInputChange = useDebouncedCallback((e) => {
         const params = new URLSearchParams(searchParams);
+        params.set('page', '1');
         (e.target.value && e.target.value.length > 2) ? params.set('q', e.target.value) : params.delete('q');    
         replace(`${pathName}?${params}`);
     }, 300);  
