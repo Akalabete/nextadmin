@@ -3,8 +3,13 @@ import Search from '../../ui/dashboard/search/search';
 import Link from 'next/link';
 import Image from 'next/image';
 import Pagination from '../../ui/dashboard/pagination/pagination';
+import { fetchUsers } from '../../lib/data';
 
-const UsersPage = () => {
+const UsersPage = async () => {
+  const users = await fetchUsers();
+
+  console.log(users)
+
   return (
     <div className={styles.container}>
         <div className={styles.top}>
@@ -25,32 +30,36 @@ const UsersPage = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <div className={styles.user}>
-                  <Image 
-                    src="/noavatar.png" 
-                    alt="avatar" 
-                    className={styles.userImage}  
-                    width={40} 
-                    height={40}
-                  />
-                  John Doe
-                </div>
-              </td>
-              <td>johndoe@test.fr</td>
-              <td>05.04.2024</td>
-              <td>Admin</td>
-              <td>Active</td>
-              <td>
-                <div className= {styles.buttons}>
-                  <Link href="/dashboard/users/test">
-                    <button className={`${styles.button} ${styles.viewbtn}`}>View</button>
-                  </Link>
-                  <button className={`${styles.button} ${styles.deletebtn}`}>Delete</button>
-                </div>
-              </td>
-            </tr>
+            {users.map((user) => (
+              <tr key= {user.id}>
+                <td>
+                  <div className={styles.user}>
+                    <Image 
+                      src={user.img || '/noavatar.png'} 
+                      alt="`avatar of ${user.name}`"
+                      className={styles.userImage}  
+                      width={40} 
+                      height={40}
+                    />
+                    {user.name}
+                  </div>
+                </td>
+                <td>{user.email}</td>
+                <td></td>
+                <td>Admin</td>
+                <td>Active</td>
+                <td>
+                  <div className= {styles.buttons}>
+                    <Link href="/dashboard/users/test">
+                      <button className={`${styles.button} ${styles.viewbtn}`}>View</button>
+                    </Link>
+                    <button className={`${styles.button} ${styles.deletebtn}`}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+            
+            
             <tr>
               <td>
               <div className={styles.user}>
