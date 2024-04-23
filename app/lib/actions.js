@@ -59,3 +59,29 @@ export const addProduct = async (formData) => {
     revalidatePath("/dashboard/products")
     redirect("/dashboard/products");
 }
+
+export const deleteUser= async (formData) => {
+    const { id } = Object.fromEntries(formData);
+    try {
+        connectToDatabase();
+        await Product.findByIdAndDelete(id);
+    }
+    catch(err) {
+        console.log(err);
+        throw new Error ("Epic fail user deletion");
+    }
+    revalidatePath("/dashboard/users")
+}
+
+export const deleteProduct= async (formData) => {
+    const { id } = Object.fromEntries(formData);
+    try {
+        connectToDatabase();
+        await Product.findByIdAndDelete(id);
+    }
+    catch(err) {
+        console.log(err);
+        throw new Error ("Epic fail product deletion");
+    }
+    revalidatePath("/dashboard/products")
+}
