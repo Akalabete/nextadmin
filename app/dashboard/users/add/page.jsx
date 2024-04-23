@@ -1,9 +1,9 @@
 import styles from '../../../ui/dashboard/users/addUser/addUser.module.css';
-
+import { addUser } from '../../../lib/actions';
 const AddUserPage = () => {
     return (
         <div className={styles.container}>
-            <form action="" className={styles.form}>
+            <form action={addUser} className={styles.form}>
                 <input 
                     type="text" 
                     placeholder="username"
@@ -31,7 +31,7 @@ const AddUserPage = () => {
                     id="role"
                     required
                 >   
-                    <option value={false} selected>Is Admin</option>
+                    <option value={false}>Is Admin</option>
                     <option value={true}>Yes</option>
                     <option value={false}>No</option>
                 </select>
