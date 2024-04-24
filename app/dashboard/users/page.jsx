@@ -22,6 +22,7 @@ const UsersPage = async ({searchParams}) => {
         <table className={styles.table}>
           <thead>
             <tr>
+              <td>Avatar</td>
               <td>Name</td>
               <td>Email</td>
               <td>Created at</td>  
@@ -42,9 +43,9 @@ const UsersPage = async ({searchParams}) => {
                       width={40} 
                       height={40}
                     />
-                    {user.name}
                   </div>
                 </td>
+                <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>{user.createdAt?.toString().slice(4,16)}</td>
                 <td>{user.isAdmin ? "Admin" : "User"}</td>

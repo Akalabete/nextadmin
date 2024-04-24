@@ -13,7 +13,27 @@ export const fetchUsers = async (q, page) => {
         throw new Error('Failed to fetch users') 
     }
 }
-
+export const fetchUser = async (id) => {
+    try {
+        connectToDatabase();
+        const user = await User.findById(id);
+        return user;
+    } catch (error) {
+        console.error(error)
+        throw new Error('Failed to fetch user') 
+    }
+};
+export const fetchProduct = async (id) => {
+    try {
+        connectToDatabase();
+        const product = await Product.findById(id);
+        return product;
+    }
+    catch (error) {
+        console.error(error)
+        throw new Error('Failed to fetch product') 
+    }   
+};
 export const fetchProducts = async (q, page) => {
     const regex = new RegExp(q, 'i');
     const itemsPerPage = 4;

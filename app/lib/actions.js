@@ -33,6 +33,38 @@ export const addUser = async (formData) => {
     revalidatePath("/dashboard/users")
     redirect("/dashboard/users");
 }
+export const updateUser = async (formData) => {
+    const varsalt = parseInt(process.env.SALT);
+    const { id, username, email, password, phone, adress, img, isAdmin, isActive } = Object.fromEntries(formData);
+    try {
+        connectToDatabase();
+        
+        const updateFields = {
+            username,
+            password,
+            email,
+            phone,
+            adress,
+            img,
+            isAdmin,
+            isActive
+        }
+        Object.keys(updateFields).forEach((key)=> (updateFields[key] === "" || undefined) && delete updateFields[key]);
+        if (updateFields.password) {
+            const salt = await bcrypt.genSalt(varsalt);
+            updateFields.password = await bcrypt.hash(updateFields.password, salt);
+        }
+        await User.findByIdAndUpdate(id, updateFields)
+        console.log(updateFields);
+        
+        }catch(err) {
+            console.log(err);
+            throw new Error ("Epic fail update user");
+        }
+        revalidatePath("/dashboard/users")
+        redirect("/dashboard/users");
+        
+    }
 
 export const addProduct = async (formData) => {
     const { title, desc, price, stock, color, size, img, cat } = Object.fromEntries(formData);

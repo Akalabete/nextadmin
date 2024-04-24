@@ -1,66 +1,68 @@
 import styles from '../../../ui/dashboard/users/singleUser/singleUser.module.css';
 import Image from 'next/image';
+import { fetchUser } from '../../../lib/data';
+import { updateUser } from '../../../lib/actions';
 
-
-const SingleUserPage = () => {
+const SingleUserPage = async({params}) => {
+    const {id} = params;
+    const user = await fetchUser(id);
     return (
         <div className={styles.container}>
             <div className={styles.infoContainer}>
                 <div className={styles.imgContainer}>
-                    <Image src='/noavatar.png' alt='avatar' fill />
+                    <Image src={user.img || "/noavatar.png"} alt="user's avatar" fill />
                 </div>
-                John Doe
+                {user.username}
             </div>
             <div className={styles.formContainer}>
-                <form action="" className={styles.form}>
+                <form action={updateUser} className={styles.form}>
+                    <input type="hidden" name="id" value={user.id} />
                     <label>Username</label>
                     <input 
                         type="text"
                         name="username"
-                        placeholder="John Doe"
+                        placeholder={user.username || "non renseigné"}
                     />
                     <label>Email</label>
                     <input 
                         type="email"
                         name="email"
-                        placeholder="JohnDoe@test.fr"
+                        placeholder={user.email || "non renseigné"}
                     />
-                    <label>Email</label>
-                    <input 
-                        type="email"
-                        name="email"
-                        placeholder="JohnDoe@test.fr"
+                    <label>Avatar</label>
+                    <input
+                        type="text"
+                        name="img"
                     />
                     <label>Password</label>
                     <input 
                         type="password"
                         name="password"
-                        placeholder=""
                     />
                     <label>Phone</label>
                     <input 
                         type="phone"
                         name="phone"
-                        placeholder="1234567890"
+                        placeholder={user.phone || "non renseigné"  }
                     />
                     <label>Adress</label>
                     <textarea
                         id="adress"
                         name="adress"
-                        placeholder="adress"
+                        placeholder={user.adress || "non renseigné"  }
                     >
                     </textarea>
                     <label>Is Admin?</label>
-                    <select name="isadmin">
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
+                    <select name="isAdmin">
+                        <option selected={user.isAdmin} value="true">Yes</option>
+                        <option selected={!user.isAdmin} value="false">No</option>
                     </select>
                     <label>Is Active</label>
-                    <select name="isactive">
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
+                    <select name="isActive">
+                        <option selected={user.isActive} value="true">Yes</option>
+                        <option selected={!user.isActive} value="false">No</option>
                     </select>
-                    <button>Update Profile</button>
+                    <button type="submit">Update Profile</button>
                 </form>
             </div>
         </div>
