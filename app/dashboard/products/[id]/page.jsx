@@ -1,63 +1,72 @@
 import styles from '../../../ui/dashboard/products/singleProduct/singleProduct.module.css';
 import Image from 'next/image';
+import { fetchProduct } from '../../../lib/data';
+import { updateProduct } from '../../../lib/actions';
 
-
-const SingleProductPage = () => {
+const SingleProductPage = async ({params}) => {
+    const {id} = params;
+    const product = await fetchProduct(id);
     return (
         <div className={styles.container}>
             <div className={styles.infoContainer}>
                 <div className={styles.imgContainer}>
-                    <Image src='/noproduct.jpg' alt='article pic' fill />
+                    <Image src={product.img ||'/noproduct.jpg'} alt='article pic' fill />
                 </div>
                 Product whatever
             </div>
             <div className={styles.formContainer}>
-                <form action="" className={styles.form}>
+                <form action={updateProduct} className={styles.form}>
+                    <input type="hidden" name="id" value={product.id} />
                     <label>Title</label>
                     <input 
                         type="text"
                         name="title"
-                        placeholder="Product x"
+                        placeholder={product.title || "NA"}
                     />
                     <label>Price</label>
                     <input 
                         type="number"
                         name="price"
-                        placeholder="€"
+                        placeholder={`${product.price} €` || "NA"}
                     />
                     <label>Stock</label>
                     <input 
                         type="number"
                         name="stock"
-                        placeholder="NA"
+                        placeholder={product.stock || "NA"}
+                    />
+                    <label>Image</label>
+                    <input 
+                        type="text"
+                        name="img"
                     />
                     <label>Color</label>
                     <input 
                         type="text"
                         name="color"
-                        placeholder="NA"
+                        placeholder={product.color || "NA"}
                     />
                     <label>Size</label>
                     <input 
                         type="text"
                         name="size"
-                        placeholder="NA"
+                        placeholder={product.size || "NA" }
                     />
                     <label>Category</label>
                     <select name="cat">
-                        <option value="kitchen">Kitchen</option>
-                        <option value="techno">Technologies</option>
-                        <option value="home">House</option>
+                        <option selected={product.cat==="kitchen"} value="kitchen">Kitchen</option>
+                        <option selected={product.cat==="techno"} value="techno">Technologies</option>
+                        <option selected={product.cat==="home"} value="home">House</option>
                     </select>
                     <label>Description</label>
                     <textarea
                         id="desc"
                         name="desc"
                         rows="10"
-                        placeholder="Description of the article"
+                        placeholder={product.desc || "NA"  }
                     >
                     </textarea>
-                    <button>Update Article</button>
+                    <button type="submit" >Update Article</button>
                 </form>
             </div>
         </div>
