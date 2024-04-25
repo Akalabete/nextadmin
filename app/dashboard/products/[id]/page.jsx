@@ -6,6 +6,9 @@ import { updateProduct } from '../../../lib/actions';
 const SingleProductPage = async ({params}) => {
     const {id} = params;
     const product = await fetchProduct(id);
+    const categories = ["kitchen", "techno", "home"];
+    const defaultCategory = categories.includes(product.cat) ? product.cat : "uncategorized";
+
     return (
         <div className={styles.container}>
             <div className={styles.infoContainer}>
@@ -53,10 +56,10 @@ const SingleProductPage = async ({params}) => {
                         placeholder={product.size || "NA" }
                     />
                     <label>Category</label>
-                    <select name="cat">
-                        <option selected={product.cat==="kitchen"} value="kitchen">Kitchen</option>
-                        <option selected={product.cat==="techno"} value="techno">Technologies</option>
-                        <option selected={product.cat==="home"} value="home">House</option>
+                    <select name="cat" defaultValue={defaultCategory}>
+                        <option value="kitchen">Kitchen</option>
+                        <option value="techno">Technologies</option>
+                        <option value="home">House</option>
                     </select>
                     <label>Description</label>
                     <textarea

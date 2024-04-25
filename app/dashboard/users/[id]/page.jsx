@@ -53,14 +53,14 @@ const SingleUserPage = async({params}) => {
                     >
                     </textarea>
                     <label>Is Admin?</label>
-                    <select name="isAdmin">
-                        <option selected={user.isAdmin} value="true">Yes</option>
-                        <option selected={!user.isAdmin} value="false">No</option>
+                    <select name="isadmin" defaultValue={user.isAdmin ? "true" : "false"}>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
                     </select>
                     <label>Is Active</label>
-                    <select name="isActive">
-                        <option selected={user.isActive} value="true">Yes</option>
-                        <option selected={!user.isActive} value="false">No</option>
+                    <select name="isactive" defaultValue={user.isActive ? "true" : "false"}>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
                     </select>
                     <button type="submit">Update Profile</button>
                 </form>

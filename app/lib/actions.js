@@ -54,9 +54,7 @@ export const updateUser = async (formData) => {
             const salt = await bcrypt.genSalt(varsalt);
             updateFields.password = await bcrypt.hash(updateFields.password, salt);
         }
-        await User.findByIdAndUpdate(id, updateFields)
-        console.log(updateFields);
-        
+        await User.findByIdAndUpdate(id, updateFields);        
         }catch(err) {
             console.log(err);
             throw new Error ("Epic fail update user");
